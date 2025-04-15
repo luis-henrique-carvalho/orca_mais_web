@@ -4,6 +4,7 @@ import { User } from '@/types/User';
 
 interface AuthContextData {
     authStage: { token: string | null, authenticated: boolean, user: User | null };
+    loading: boolean;
     onRegister: (email: string, password: string, full_name: string) => Promise<void>;
     onLogin: (email: string, password: string) => Promise<void>;
     onLogout: () => Promise<void>;
@@ -15,6 +16,7 @@ const USER_KEY = 'user';
 
 const AuthContext = createContext<AuthContextData>({
     authStage: { token: null, authenticated: false, user: null },
+    loading: true,
     onRegister: async () => { },
     onLogin: async () => { },
     onLogout: async () => { }
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         authenticated: false,
         user: null
     });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadToken = async () => {
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
                 setAuthStage({ token: parsedToken, authenticated: true, user: parsedUser });
             }
+            setLoading(false);
         };
 
         loadToken();
@@ -105,6 +109,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const values = {
         authStage,
+        loading, // Adicionado
         onRegister: register,
         onLogin: login,
         onLogout: logout

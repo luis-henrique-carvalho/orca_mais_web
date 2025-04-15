@@ -1,5 +1,5 @@
 import { AuthProvider } from "@/context/AuthContext";
-
+import { ThemeProvider } from "@/components/theme-provider";
 interface AppProvidersProps {
     children: React.ReactNode;
 }
@@ -7,7 +7,9 @@ interface AppProvidersProps {
 const AppProviders = ({ children }: AppProvidersProps) => {
     return (
         <AuthProvider>
-            {children}
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                {children}
+            </ThemeProvider>
         </AuthProvider>
     );
 };

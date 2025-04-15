@@ -1,10 +1,25 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { AppSidebar } from "@/components/app-sidebar";
 
 function PrivateRoutes() {
-  const { authStage } = useAuth()
+  const { authStage, loading } = useAuth();
 
-  return authStage.authenticated ? <Outlet /> : <Navigate to="/login" />;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return authStage.authenticated ? (
+    <SidebarProvider>
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <Outlet />
+      </SidebarInset>
+    </SidebarProvider>
+  ) : <Navigate to="/login" />;
 }
 
 export default PrivateRoutes;

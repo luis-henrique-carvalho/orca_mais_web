@@ -1,10 +1,17 @@
-import { Outlet, Navigate } from 'react-router-dom'
+import { Outlet, Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function PublicRoutes() {
-    const { authStage } = useAuth()
+    const { authStage, loading } = useAuth()
+    const location = useLocation()
 
-    return authStage.authenticated ? <Navigate to='/' /> : <Outlet />
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    const isLoginOrSignup = location.pathname === '/login' || location.pathname === '/signup'
+
+    return authStage.authenticated && isLoginOrSignup ? <Navigate to='/' /> : <Outlet />
 }
 
 export default PublicRoutes
