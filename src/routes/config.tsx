@@ -21,16 +21,42 @@ export const routes: RouteConfig[] = [
     component: Home,
   },
   {
+    title: "Transactions",
+    path: "/transactions",
+    isPrivate: true,
+    component: () => <div>Transactions</div>,
+    children: [
+      {
+        title: "Create Transaction",
+        path: "/transactions/create",
+        isPrivate: true,
+        component: () => <div>Create Transaction</div>,
+      },
+      {
+        title: "Transaction Details",
+        path: "/transactions/:id",
+        isPrivate: true,
+        component: () => <div>Transaction Details</div>,
+      },
+      {
+        title: "Transaction Edit",
+        path: "/transactions/edit/:id",
+        isPrivate: true,
+        component: () => <div>Transaction Edit</div>,
+      }
+    ]
+  },
+  {
     title: "Profile",
     path: "/profile",
     isPrivate: true,
-    component: () => <div>Profile</div>, // Placeholder
+    component: () => <div>Profile</div>,
     children: [
       {
         title: "Edit Profile",
         path: "/profile/edit",
         isPrivate: true,
-        component: () => <div>Edit Profile</div>, // Placeholder
+        component: () => <div>Edit Profile</div>,
       }
     ],
   },

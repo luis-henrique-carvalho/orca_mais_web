@@ -4,6 +4,7 @@ import AppProviders from './providers/AppProviders';
 import { routes } from './routes/config';
 import { flattenRoutes } from './routes/helpers';
 import PublicRoutes from './routes/publicRoutes';
+import ErrorComp from './modules/Public/ErrorComp';
 
 function App() {
   const flatRoutes = flattenRoutes(routes);
@@ -12,6 +13,8 @@ function App() {
     <AppProviders>
       <BrowserRouter>
         <Routes>
+          <Route element={<ErrorComp />} path='*' />
+
           {flatRoutes.map((route) => {
             return (
               <Route
