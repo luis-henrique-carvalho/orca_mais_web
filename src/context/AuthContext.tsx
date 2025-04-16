@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const values = {
         authStage,
-        loading, // Adicionado
+        loading,
         onRegister: register,
         onLogin: login,
         onLogout: logout
