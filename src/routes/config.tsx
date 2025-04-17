@@ -1,6 +1,7 @@
 import Home from '../modules/Auth/Home';
 import Login from '../modules/Public/Login';
 import SignUp from '../modules/Public/SignUp';
+import Transaction from '../modules/Auth/Transaction';
 
 export interface RouteConfig {
   title: string;
@@ -24,7 +25,7 @@ export const routes: RouteConfig[] = [
     title: "Transactions",
     path: "/transactions",
     isPrivate: true,
-    component: () => <div>Transactions</div>,
+    component: () => <Transaction />,
     children: [
       {
         title: "Create Transaction",
