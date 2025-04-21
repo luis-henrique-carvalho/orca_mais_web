@@ -27,9 +27,7 @@ export function LoginForm({
 
     const onSubmit = async (data: signInFormData) => {
         try {
-            console.log("Tentando login...");
             await onLogin(data.email, data.password);
-            console.log("Login sucesso! Redirecionando...");
             navigate("/");
         } catch (error) {
             console.log("Erro no login:", error);
